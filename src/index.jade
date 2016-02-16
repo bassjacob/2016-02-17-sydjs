@@ -1,0 +1,79 @@
+doctype html
+html
+  head
+    title Asynchronous Universal Component Rendering
+    meta(charset="utf-8")
+    link(rel="stylesheet" href="public/styles.css")
+
+  body
+    textarea(id="source")= slides
+
+    script(src="https://gnab.github.io/remark/downloads/remark-latest.min.js")
+    script.
+      window.remark || document.write('<script src="public/remark.js"><\/script>')
+    script.
+      var slideshow = remark.create({
+        ratio: "16:9",
+        highlightLanguage: 'javascript',
+        highlightStyle: 'monokai',
+        slideNumberFormat: function (current, total) {
+          return null;
+        }
+      });
+
+      function grow(e) {
+        var oldSize = 34;
+
+        if (e.style.fontSize !== "") {
+          oldSize = parseInt(e.style.fontSize.replace('px',''));
+        }
+
+        e.style.fontSize = `${oldSize}px`;
+        var oldWidth = e.scrollWidth;
+        var oldHeight = e.scrollHeight;
+
+        e.style.fontSize = `${oldSize + 1}px`;
+        var newSize = oldSize + 1;
+        var newWidth = e.scrollWidth;
+        var newHeight = e.scrollHeight;
+
+        if ((e.scrollHeight - oldHeight) > 0 || (e.scrollWidth - oldWidth) > 0) {
+          return shrink(e)
+        } else {
+          return grow(e)
+        }
+      }
+
+      function shrink(e) {
+        var oldSize = 34;
+        var oldWidth = e.scrollWidth;
+        var oldHeight = e.scrollHeight;
+
+        if (e.style.fontSize !== "") {
+          oldSize = parseInt(e.style.fontSize.replace('px',''));
+        }
+
+        e.style.fontSize = `${oldSize - 1}px`;
+        var newSize = oldSize - 1;
+        var newWidth = e.scrollWidth;
+        var newHeight = e.scrollHeight;
+
+        if (!((e.scrollHeight - oldHeight) === 0 && (e.scrollWidth - oldWidth) === 0)) {
+          return shrink(e)
+        }
+      }
+
+      slideshow.on('afterShowSlide', (slide) => {
+        var visibleSlide = document.querySelectorAll('.remark-slide-container')[slide.getSlideIndex()];
+        var scaler = visibleSlide.querySelector('.remark-slide-scaler');
+        var codeBlock = visibleSlide.querySelector('code');
+
+        if (codeBlock) {
+          scaler.style.overflow = 'visible';
+          if (codeBlock.scrollHeight > scaler.scrollHeight || codeBlock.scrollWidth > scaler.scrollWidth) {
+            grow(codeBlock);
+          } else {
+            grow(codeBlock);
+          }
+        }
+      })
