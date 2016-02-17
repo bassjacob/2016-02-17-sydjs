@@ -1,11 +1,11 @@
 class: center, middle
 background-color: #0A6C8A
 
-# .white-title[Asynchronous Universal Component Rendering]
+# .white-title[Asynchronous Universal Javascript Components]
 
 &nbsp;
 
-## .white-title[Beyond Flux/Redux/Relay for component data requirement definitions and fetching]
+## .white-title[Proactivity in a reactive age]
 
 ---
 
@@ -31,13 +31,13 @@ class: right
 
 class: center, middle
 
-<img style="width:60%" src="public/domain.png">
+<img style="width:70%" src="public/domain.png">
 
 ---
 
 class: center, middle
 
-<img style="width:60%" src="public/dotnet.png">
+<img style="width:70%" src="public/dotnet.png">
 
 ---
 
@@ -95,6 +95,10 @@ background-color: #4FAA33
 class: center, middle
 background-color: #22334F
 
+# .white-title[88 M.P.H]
+
+## .white-title[or]
+
 # .white-title[Flux in 5 Minutes]
 
 ---
@@ -145,6 +149,50 @@ export default class HelloWorld extends Component {
   }
 }
 ```
+
+---
+
+class: center, middle
+background-color: #77BB4F
+
+# .white-title[[rackt/async-props](https://github.com/rackt/async-props)]
+
+---
+
+```javascript
+import AsyncProps from 'async-props'
+import React from 'react'
+
+class App extends React.Component {
+  static loadProps(params, cb) {
+    cb(null, {
+      tacos: [ 'Pollo', 'Carnitas' ]
+    })
+  }
+
+  render() {
+    const tacos = this.props.tacos
+
+    return (
+      <div>
+        <ul>
+          {tacos.map(taco => <li>{taco}</li>)}
+        </ul>
+      </div>
+    )
+  }
+}
+```
+
+---
+
+class: middle
+
+## * Static method on a root component
+
+## * Executes pre-render, blocks render
+
+## * Cannot compose specific component requirements
 
 ---
 
@@ -243,93 +291,6 @@ class: middle
   https://github.com/denvned/isomorphic-relay
 
   https://github.com/facebook/relay/issues/36#issuecomment-130402024
-
----
-
-class: center, middle
-background-color: #77BB4F
-
-# .white-title[[rackt/async-props](https://github.com/rackt/async-props)]
-
----
-
-```javascript
-import AsyncProps from 'async-props'
-import React from 'react'
-
-class App extends React.Component {
-  static loadProps(params, cb) {
-    cb(null, {
-      tacos: [ 'Pollo', 'Carnitas' ]
-    })
-  }
-
-  render() {
-    const tacos = this.props.tacos
-
-    return (
-      <div>
-        <ul>
-          {tacos.map(taco => <li>{taco}</li>)}
-        </ul>
-      </div>
-    )
-  }
-}
-```
-
----
-
-class: middle
-
-## * Static method on a root component
-
-## * Executes pre-render, blocks render
-
-## * Cannot compose specific component requirements
-
----
-
-class: center, middle
-background-color: #22BB4F
-
-# .white-title[[RickWong/react-transmit](https://github.com/RickWong/react-transmit)]
-
----
-
-```javascript
-import React  from "react";
-import Transmit from "react-transmit";
-
-const Story = React.createClass({
-  render () {
-    const {story} = this.props;
-    return <p>{story.content}</p>;
-  }
-});
-
-export default Transmit.createContainer(Story, {
-  fragments: {
-    story: ({storyId}) => {
-      return fetch(
-        `https://some.api/stories/${storyId}`
-      ).then(
-        res => res.json()
-      );
-    }
-  }
-});
-```
-
----
-
-class: middle
-
-## * Uses HoC's to compose component data requests
-
-## * Executes during render phase
-
-## * Monkey-Patches React.createElement to block server render while pending
 
 ---
 
