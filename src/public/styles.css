@@ -6,6 +6,10 @@
   margin: 0;
 }
 
+.image__center img {
+  width: 60%;
+}
+
 code.remark-code {
   position: absolute;
   top: 0;

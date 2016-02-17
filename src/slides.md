@@ -29,6 +29,26 @@ class: right
 
 ---
 
+class: center, middle
+
+.image__center[![Domain](/public/domain.png)]
+
+---
+
+class: center, middle
+
+.image__center[![.net](/public/dotnet.png)]
+
+---
+
+class: center, middle
+
+
+.image__center[![react](/public/react.png)]
+
+---
+
+
 class: center, middle, inverse
 
 # Why React?
