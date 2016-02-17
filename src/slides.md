@@ -31,20 +31,20 @@ class: right
 
 class: center, middle
 
-.image__center[![Domain](/public/domain.png)]
+<img style="width:60%" src="public/domain.png">
 
 ---
 
 class: center, middle
 
-.image__center[![.net](/public/dotnet.png)]
+<img style="width:60%" src="public/dotnet.png">
 
 ---
 
 class: center, middle
 
 
-.image__center[![react](/public/react.png)]
+<img style="width:60%" src="public/react.png">
 
 ---
 
